@@ -1,5 +1,5 @@
 resource "aws_iam_role" "glue_role" {
-  name               = "GlueServiceRole"
+  name               = var.role_name
   assume_role_policy = file("trust/role-glue.json")
 }
 
@@ -15,7 +15,7 @@ resource "aws_iam_role_policy_attachment" "glue" {
 }
 
 resource "aws_glue_catalog_database" "glue_catalog_database" {
-  name = "glue_catalog_database"
+  name = var.database_name
 }
 
 resource "aws_s3_object" "etl_script" {
@@ -26,24 +26,24 @@ resource "aws_s3_object" "etl_script" {
 }
 
 resource "aws_glue_job" "job" {
-  name     = "job"
+  name     = var.job_name
   role_arn = aws_iam_role.glue_role.arn
 
   command {
     script_location = "s3://${aws_s3_object.etl_script.bucket}/${aws_s3_object.etl_script.key}"
-    python_version  = "3"
+    python_version  = var.python_version
     name            = "glueetl"
   }
 
   default_arguments = {
     "--job-language"              = "python"
-    "--continuous-log-logGroup"   = "/aws-glue/jobs"
+    "--continuous-log-logGroup"   = var.log_group
     "--enable-continuous-logging" = "true"
     "--enable-metrics"            = "true"
   }
 
-  glue_version      = "4.0"
+  glue_version      = var.glue_version
   execution_class   = "FLEX"
-  worker_type       = "G.1X"
-  number_of_workers = 2
+  worker_type       = var.worker_type
+  number_of_workers = var.number_of_workers
 }

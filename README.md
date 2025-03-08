@@ -4,8 +4,7 @@ This project is a simple example of how to create a Glue Job using Terraform.
 ### Requirements
 - AWS Cli
 - Terraform Cli
-- Java 17
-- Maven
+- Python >= 3.12
 - Docker*
 - Localstack Cli*
 - S3 Bucket pre-built in AWS
