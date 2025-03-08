@@ -24,7 +24,7 @@ variable "role_name" {
 variable "job_name" {
   description = "Name of the Glue job"
   type        = string
-  default     = "job"
+  default     = ""
 }
 
 variable "database_name" {
