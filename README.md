@@ -1,4 +1,4 @@
-## Spring Boot Application
+## Python Glue Job with Terraform and Github Actions
 This project is a simple example of how to create a Glue Job using Terraform. 
 
 ### Requirements
@@ -7,22 +7,22 @@ This project is a simple example of how to create a Glue Job using Terraform.
 - Python >= 3.12
 - Docker*
 - Localstack Cli*
-- S3 Bucket pre-built in AWS
+- S3 Bucket pre-built in AWS**
 
 *Not essential, but recommended.
+**Is also possible to create a new bucket in this terraform script.
 
 ### Localstack
-To use LocalStack on your local machine, add a profile in the aws cli settings: `.aws/credentials` and `.aws/config`
+To use LocalStack on your local machine, add a profile in the aws cli settings:
+- `.aws/credentials`
+- `.aws/config`
 
 ### Terraform State
-The S3 bucket pre-built is used to store the terraform state file. The bucket name is defined in the `backend.tf` file.
+There is a S3 bucket pre-built used to store the terraform state file.
+The bucket name is defined in the `backend.tf` file.
 
 ```shell
-mvn -f app clean & mvn -f app build
-```
-
-```shell
-mvn -f app spring-boot:run
+flake8 app
 ```
 
 ```shell
