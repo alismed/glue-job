@@ -2,9 +2,9 @@ name: Create Glue Job Flex with Python Runtime
 
 on:
   pull_request:
-    types: opened
+    types: [opened]
     branches:
-      - main
+      - 'feature/**'
 
 jobs:
   deploy:
